@@ -1,3 +1,27 @@
+export interface TConstructorState {
+  constructorItems: {
+    bun: TConstructorIngredient | null;
+    ingredients: TConstructorIngredient[];
+  };
+  isLoading: boolean;
+  error: string | null;
+}
+
+export interface TIngredientsState {
+  ingredients: TIngredient[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+export interface OrderState {
+  order: TOrder | null;
+  feed: TOrdersData;
+  userOrders: TOrder[];
+  error: string | undefined | null;
+  orderRequest: boolean;
+  orderModalData: TOrder | null;
+}
+
 export type TIngredient = {
   _id: string;
   name: string;
