@@ -6,6 +6,26 @@ const URL = process.env.BURGER_API_URL;
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
+/*const checkResponse = async <T>(res: Response): Promise<T> => {
+  const contentType = res.headers.get('content-type');
+
+  // Если сервер возвращает HTML вместо JSON
+  if (!contentType?.includes('application/json')) {
+    const text = await res.text();
+    throw new Error(
+      `Expected JSON, got ${contentType}. Response start: ${text.slice(0, 100)}...`
+    );
+  }
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || `HTTP error! status: ${res.status}`);
+  }
+
+  return data as T;
+};*/
+
 type TServerResponse<T> = {
   success: boolean;
 } & T;
@@ -78,6 +98,21 @@ export const getIngredientsApi = () =>
       if (data?.success) return data.data;
       return Promise.reject(data);
     });
+
+/*export const getIngredientsApi = async () => {
+  const url = `${URL}/ingredients`;
+  console.log('Fetching:', url); // Логируем URL
+  try {
+    const res = await fetch(url);
+    console.log('Response status:', res.status); // Логируем статус
+    const data = await checkResponse<TIngredientsResponse>(res);
+    if (data?.success) return data.data;
+    return Promise.reject(data);
+  } catch (error) {
+    console.error('API Error:', error); // Логируем ошибку
+    throw error;
+  }
+};*/
 
 export const getFeedsApi = () =>
   fetch(`${URL}/orders/all`)
