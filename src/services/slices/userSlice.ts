@@ -12,6 +12,7 @@ import {
   getUserApi,
   logoutApi
 } from '../../utils/burger-api';
+import { RootState } from '../store';
 
 export const registerUser = createAsyncThunk(
   'user/register',
@@ -156,3 +157,6 @@ export const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 export const { setUser, setAuthChecked } = userSlice.actions;
+export const selectUser = (state: RootState) => state.user.user;
+export const selectIsAuthChecked = (state: RootState) =>
+  state.user.isAuthChecked;
