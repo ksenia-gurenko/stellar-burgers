@@ -18,6 +18,12 @@
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
+       "@pages": ["src/pages/"],
+      "@components": ["src/components/"],
+      "@ui": ["src/components/ui/"],
+      "@ui-pages": ["src/components/ui/pages/"],
+      "@slices": ["src/services/slices/"],
+      "@selectors": ["src/services/selectors/"],
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/components/*"],
       "@ui/*": ["src/components/ui/*"],

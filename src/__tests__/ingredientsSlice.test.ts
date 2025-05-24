@@ -1,5 +1,5 @@
-import { ingredientsReducer } from '../services//slices/ingredientsSlice';
-import { getIngredientsData } from '../services//slices/ingredientsSlice';
+import { ingredientsReducer, initialState } from '../services/slices/ingredientsSlice';
+import { getIngredientsData } from '../services/slices/ingredientsSlice';
 import { TIngredient } from '@utils-types';
 
 const mockIngredients: TIngredient[] = [
@@ -20,17 +20,16 @@ const mockIngredients: TIngredient[] = [
 
 describe('ingredientsSlice', () => {
   it('should handle initial state', () => {
-    expect(ingredientsReducer(undefined, { type: 'unknown' })).toEqual({
-      ingredients: [],
-      isLoading: false,
-      error: null
-    });
+    expect(ingredientsReducer(undefined, { type: 'unknown' })).toEqual(initialState);
   });
 
   it('should set isLoading to true on pending', () => {
     const action = { type: getIngredientsData.pending.type };
-    const state = ingredientsReducer(undefined, action);
-    expect(state.isLoading).toBe(true);
+    const state = ingredientsReducer(initialState, action);
+    expect(state).toEqual({
+      ...initialState,
+      isLoading: true
+    });
   });
 
   it('should handle fulfilled', () => {
@@ -38,12 +37,12 @@ describe('ingredientsSlice', () => {
       type: getIngredientsData.fulfilled.type,
       payload: mockIngredients
     };
-    const state = ingredientsReducer(undefined, action);
+    const state = ingredientsReducer(initialState, action);
     
     expect(state).toEqual({
+      ...initialState,
       ingredients: mockIngredients,
-      isLoading: false,
-      error: null
+      isLoading: false
     });
   });
 
@@ -53,10 +52,10 @@ describe('ingredientsSlice', () => {
       type: getIngredientsData.rejected.type,
       error: { message: errorMessage }
     };
-    const state = ingredientsReducer(undefined, action);
+    const state = ingredientsReducer(initialState, action);
     
     expect(state).toEqual({
-      ingredients: [],
+      ...initialState,
       isLoading: false,
       error: errorMessage
     });

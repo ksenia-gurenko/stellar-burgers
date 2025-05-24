@@ -98,8 +98,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "cypress:open": "cypress open",
-    "cypress:test": "npx cypress run --spec 'cypress/e2e/alltests/alltests.cy.ts'",
-    "run test": "npm run cypress:test # run the 'cypress:test' package script"
+    "cypress:test": "npx cypress run --spec 'cypress/e2e/alltests/alltests.cy.ts'"
   },
   "eslintConfig": {
     "extends": [
