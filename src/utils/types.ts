@@ -1,3 +1,33 @@
+export interface TConstructorState {
+  constructorItems: {
+    bun: TConstructorIngredient | null;
+    ingredients: TConstructorIngredient[];
+  };
+  isLoading: boolean;
+  error: string | null;
+}
+
+export interface TIngredientsState {
+  ingredients: TIngredient[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+export type UserState = {
+  isAuthChecked: boolean;
+  user: TUser | null;
+  error: string | undefined;
+};
+
+export interface OrderState {
+  order: TOrder | null;
+  feed: TOrdersData;
+  userOrders: TOrder[];
+  error: string | undefined | null;
+  orderRequest: boolean;
+  orderModalData: TOrder | null;
+}
+
 export type TIngredient = {
   _id: string;
   name: string;
@@ -11,6 +41,7 @@ export type TIngredient = {
   image_large: string;
   image_mobile: string;
 };
+
 
 export type TConstructorIngredient = TIngredient & {
   id: string;
